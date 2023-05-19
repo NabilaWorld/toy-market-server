@@ -31,7 +31,7 @@ async function run() {
     await client.connect();
 
 
-    const toyCollection = client.db('girlsCookingToy').collection('toy');
+    const toyCollection = client.db('cookingToy').collection('girlsToy');
 
     // all data load
     app.get('/toy', async(req, res)=>{
@@ -42,10 +42,25 @@ async function run() {
 
 
     // single data load
-    app.get('/food_details/:id', async(req, res)=>{
+    app.get('/toy/:id', async(req, res)=>{
       const id = req.params.id;
       const query = {_id: new ObjectId(id)}
-      const result = await toyCollection.findOne(query);
+
+      const options = {
+        projection: {
+        picture_1: 1,
+        name_1: 1,
+        seller_name_1: 1,
+        seller_email_1: 1,
+        price_1: 1,
+        rating_1: 1,
+        available_quantity_1,
+        detail_discription_1
+
+            }
+      }
+
+      const result = await toyCollection.findOne(query, options);
       res.send(result);
     })
 
