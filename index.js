@@ -54,8 +54,17 @@ async function run() {
         seller_email_1: 1,
         price_1: 1,
         rating_1: 1,
-        available_quantity_1,
-        detail_discription_1
+        available_quantity_1: 1,
+        detail_discription_1: 1,
+
+        picture_2: 1,
+        name_2: 1,
+        seller_name_2: 1,
+        seller_email_2: 1,
+        price_2: 1,
+        rating_2: 1,
+        available_quantity_2: 1,
+        detail_discription_2: 1,
 
             }
       }
