@@ -42,7 +42,7 @@ async function run() {
     })
 
 
-    // single data load
+    // single data load 1
     app.get('/toy/:id', async(req, res)=>{
       const id = req.params.id;
       const query = {_id: new ObjectId(id)}
@@ -85,13 +85,53 @@ async function run() {
     })
 
 
+
+    // single data load 2
+    app.get('/myToy/:id', async(req, res) => {
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)};
+
+      const options = {
+        projection: {
+          photoUrl: 1,
+          name: 1,
+          seller_name: 1,
+          email: 1,
+          price: 1,
+          rating: 1,
+          quantity: 1,
+          description: 1,
+
+       
+
+            }
+      }
+    
+      const result = await addToy.findOne(query, options);
+      res.send(result);
+    });
+    
+
+
     // add toy
+    app.get('/myToy', async(req, res)=>{
+      console.log(req.query.email);
+      let query = {};
+      if(req.query?.email){
+        query = {email: req.query.email}
+      }
+      const result = await addToy.find(query).toArray();
+      res.send(result);
+    })
+
+
     app.post('/myToy', async(req, res)=>{
       const myToy = req.body;
       console.log(myToy);
       const result = await addToy.insertOne(myToy);
       res.send(result);
     });
+
 
 
     // Send a ping to confirm a successful connection
