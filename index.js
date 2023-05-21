@@ -202,7 +202,8 @@ async function run() {
   const result = await addToy.find({
     $or: [
       {name: {$regex: searchText, $options: "i"}},
-      {subcategory: {$regex: searchText, $options: "i"}}
+      {category: {$regex: searchText, $options: "i"}},
+      
     ]
   })
   .toArray();
