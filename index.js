@@ -194,19 +194,20 @@ async function run() {
       res.send(result);
     });
 
-
-// search
+//name
+const indexKey = {name:1}
+const indexOptions = {name: "name_index"}
+const result = await addToy.createIndex(indexKey,indexOptions)
+// search /toySearch
  app.get("/toySearch/:text", async (req, res)=>{
+  
   const searchText = req.params.text;
-
-  const result = await addToy.find({
-    $or: [
-      {name: {$regex: searchText, $options: "i"}},
-      {category: {$regex: searchText, $options: "i"}},
-      
-    ]
-  })
+console.log(searchText)
+  const result = await addToy.find(
+      {name: {$regex: searchText, $options: "i"}}
+  )
   .toArray();
+ 
   res.send(result)
  })
 
